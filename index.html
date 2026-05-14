@@ -248,6 +248,110 @@
                 <div class="w-12 flex justify-center text-gray-800"><i class="fa-brands fa-tiktok text-3xl"></i></div>
                 <div class="ml-4 text-left"><p class="font-black text-[16px] uppercase text-gray-800 leading-none">TIKTOK (KÊNH 2)</p></div>
             </a>
+            <div class="card-custom bg-white p-6 border-t-[8px] border-red-700 shadow-xl my-6 text-left">
+            <h2 class="text-2xl font-black text-center text-red-800 mb-1 uppercase">Tra Cứu Hạn 2026</h2>
+            <p class="text-center text-gray-500 text-[10px] mb-6 font-bold uppercase italic">Dữ liệu Sao-Hạn theo bảng chuẩn & Logic Tứ Đại Hạn</p>
+            
+            <div class="grid grid-cols-2 gap-3 mb-4">
+                <div>
+                    <label class="block text-[11px] font-black text-gray-600 mb-1 uppercase">Năm sinh:</label>
+                    <input type="number" id="birthYear" value="1984" class="w-full px-3 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 outline-none text-center font-black text-lg text-black">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-black text-gray-600 mb-1 uppercase">Năm xem:</label>
+                    <input type="number" value="2026" readonly class="w-full px-3 py-3 border-2 border-gray-100 rounded-xl bg-gray-50 text-center font-black text-lg text-gray-400">
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-[11px] font-black text-gray-600 mb-1 uppercase">Giới tính:</label>
+                <select id="gender" class="w-full px-3 py-3 border-2 border-gray-200 rounded-xl font-black bg-white text-black outline-none appearance-none cursor-pointer">
+                    <option value="nam">Nam mạng</option>
+                    <option value="nu">Nữ mạng</option>
+                </select>
+            </div>
+
+            <button onclick="calculate()" class="w-full bg-red-700 hover:bg-red-800 text-white font-black py-4 rounded-xl shadow-lg transition duration-200 uppercase text-lg mb-6">
+                Xem Kết Quả Chuẩn
+            </button>
+
+            <div id="resultArea" class="hidden space-y-3">
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="rounded-xl p-3 border border-blue-100 bg-blue-50 text-center">
+                        <span class="text-[9px] font-black uppercase text-blue-400 block">Sao Chiếu Mệnh</span>
+                        <p id="resSao" class="text-[15px] font-black text-blue-900"></p>
+                    </div>
+                    <div class="rounded-xl p-3 border border-orange-100 bg-orange-50 text-center">
+                        <span class="text-[9px] font-black uppercase text-orange-400 block">Hạn Niên</span>
+                        <p id="resHanNien" class="text-[15px] font-black text-orange-900"></p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="rounded-xl p-3 border border-gray-100 bg-white text-center">
+                        <span class="text-[9px] font-black uppercase text-gray-400 block">Tam Tai</span>
+                        <p id="resTamTai" class="text-[13px] font-black"></p>
+                    </div>
+                    <div class="rounded-xl p-3 border border-gray-100 bg-white text-center">
+                        <span class="text-[9px] font-black uppercase text-gray-400 block">Thái Tuế</span>
+                        <p id="resThaiTue" class="text-[13px] font-black"></p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="rounded-xl p-3 border border-gray-100 bg-white text-center">
+                        <span class="text-[9px] font-black uppercase text-gray-400 block">Kim Lâu</span>
+                        <p id="resKimLau" class="text-[13px] font-black"></p>
+                    </div>
+                    <div class="rounded-xl p-3 border border-gray-100 bg-white text-center">
+                        <span class="text-[9px] font-black uppercase text-gray-400 block">Hoang Ốc</span>
+                        <p id="resHoangOc" class="text-[13px] font-black"></p>
+                    </div>
+                </div>
+                <div class="p-4 bg-[#1a1c2e] text-white rounded-xl text-center shadow-inner">
+                    <p id="resTuoiMu" class="text-xl font-black text-yellow-400 leading-none"></p>
+                    <p id="resCanChi" class="text-[10px] font-bold text-gray-400 uppercase tracking-[3px] mt-2"></p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const DATA_2026 = {1945:{sn:"La Hầu",sl:"Kế Đô",hn:"Tam Kheo",hl:"Thiên Tinh"},1946:{sn:"Mộc Đức",sl:"Thủy Diệu",hn:"Huỳnh Tuyền",hl:"Toán Tận"},1947:{sn:"Thái Âm",sl:"Thái Bạch",hn:"Diêm Vương",hl:"Thiên La"},1948:{sn:"Kế Đô",sl:"Thái Dương",hn:"Diêm Vương",hl:"Thiên La"},1949:{sn:"Vân Hớn",sl:"La Hầu",hn:"Địa Võng",hl:"Địa Võng"},1950:{sn:"Thái Dương",sl:"Thổ Tú",hn:"Thiên La",hl:"Diêm Vương"},1951:{sn:"Thái Bạch",sl:"Thái Âm",hn:"Toán Tận",hl:"Huỳnh Tuyền"},1952:{sn:"Thủy Diệu",sl:"Mộc Đức",hn:"Thiên Tinh",hl:"Tam Kheo"},1953:{sn:"Thổ Tú",sl:"Vân Hớn",hn:"Ngũ Mộ",hl:"Ngũ Mộ"},1954:{sn:"La Hầu",sl:"Kế Đô",hn:"Tam Kheo",hl:"Thiên Tinh"},1955:{sn:"Mộc Đức",sl:"Thủy Diệu",hn:"Huỳnh Tuyền",hl:"Toán Tận"},1956:{sn:"Thái Âm",sl:"Thái Bạch",hn:"Diêm Vương",hl:"Thiên La"},1957:{sn:"Kế Đô",sl:"Thái Dương",hn:"Địa Võng",hl:"Địa Võng"},1958:{sn:"Vân Hớn",sl:"La Hầu",hn:"Địa Võng",hl:"Địa Võng"},1959:{sn:"Thái Dương",sl:"Thổ Tú",hn:"Thiên La",hl:"Diêm Vương"},1960:{sn:"Thái Bạch",sl:"Thái Âm",hn:"Toán Tận",hl:"Huỳnh Tuyền"},1961:{sn:"Thủy Diệu",sl:"Mộc Đức",hn:"Thiên Tinh",hl:"Tam Kheo"},1962:{sn:"Thổ Tú",sl:"Vân Hớn",hn:"Ngũ Mộ",hl:"Ngũ Mộ"},1963:{sn:"La Hầu",sl:"Kế Đô",hn:"Tam Kheo",hl:"Thiên Tinh"},1964:{sn:"Mộc Đức",sl:"Thủy Diệu",hn:"Huỳnh Tuyền",hl:"Toán Tận"},1965:{sn:"Thái Âm",sl:"Thái Bạch",hn:"Diêm Vương",hl:"Thiên La"},1966:{sn:"Kế Đô",sl:"Thái Dương",hn:"Địa Võng",hl:"Địa Võng"},1967:{sn:"Vân Hớn",sl:"La Hầu",hn:"Thiên La",hl:"Diêm Vương"},1968:{sn:"Thái Dương",sl:"Thổ Tú",hn:"Thiên La",hl:"Diêm Vương"},1969:{sn:"Thái Bạch",sl:"Thái Âm",hn:"Toán Tận",hl:"Huỳnh Tuyền"},1970:{sn:"Thủy Diệu",sl:"Mộc Đức",hn:"Thiên Tinh",hl:"Tam Kheo"},1971:{sn:"Thổ Tú",sl:"Vân Hớn",hn:"Ngũ Mộ",hl:"Ngũ Mộ"},1972:{sn:"La Hầu",sl:"Kế Đô",hn:"Tam Kheo",hl:"Thiên Tinh"},1973:{sn:"Mộc Đức",sl:"Thủy Diệu",hn:"Huỳnh Tuyền",hl:"Toán Tận"},1974:{sn:"Thái Âm",sl:"Thái Bạch",hn:"Diêm Vương",hl:"Thiên La"},1975:{sn:"Kế Đô",sl:"Thái Dương",hn:"Địa Võng",hl:"Địa Võng"},1976:{sn:"Vân Hớn",sl:"La Hầu",hn:"Thiên La",hl:"Diêm Vương"},1977:{sn:"Thái Dương",sl:"Thổ Tú",hn:"Toán Tận",hl:"Huỳnh Tuyền"},1978:{sn:"Thái Bạch",sl:"Thái Âm",hn:"Toán Tận",hl:"Huỳnh Tuyền"},1979:{sn:"Thủy Diệu",sl:"Mộc Đức",hn:"Thiên Tinh",hl:"Tam Kheo"},1980:{sn:"Thổ Tú",sl:"Vân Hớn",hn:"Ngũ Mộ",hl:"Ngũ Mộ"},1981:{sn:"La Hầu",sl:"Kế Đô",hn:"Tam Kheo",hl:"Thiên Tinh"},1982:{sn:"Mộc Đức",sl:"Thủy Diệu",hn:"Huỳnh Tuyền",hl:"Toán Tận"},1983:{sn:"Thái Âm",sl:"Thái Bạch",hn:"Diêm Vương",hl:"Thiên La"},1984:{sn:"Kế Đô",sl:"Thái Dương",hn:"Địa Võng",hl:"Địa Võng"},1985:{sn:"Vân Hớn",sl:"La Hầu",hn:"Thiên La",hl:"Diêm Vương"},1986:{sn:"Thái Dương",sl:"Thổ Tú",hn:"Toán Tận",hl:"Huỳnh Tuyền"},1987:{sn:"Thái Bạch",sl:"Thái Âm",hn:"Thiên Tinh",hl:"Tam Kheo"},1988:{sn:"Thủy Diệu",sl:"Mộc Đức",hn:"Thiên Tinh",hl:"Tam Kheo"},1989:{sn:"Thổ Tú",sl:"Vân Hớn",hn:"Ngũ Mộ",hl:"Ngũ Mộ"},1990:{sn:"La Hầu",sl:"Kế Đô",hn:"Tam Kheo",hl:"Thiên Tinh"},1991:{sn:"Mộc Đức",sl:"Thủy Diệu",hn:"Huỳnh Tuyền",hl:"Toán Tận"},1992:{sn:"Thái Âm",sl:"Thái Bạch",hn:"Diêm Vương",hl:"Thiên La"},1993:{sn:"Kế Đô",sl:"Thái Dương",hn:"Địa Võng",hl:"Địa Võng"},1994:{sn:"Vân Hớn",sl:"La Hầu",hn:"Thiên La",hl:"Diêm Vương"},1995:{sn:"Thái Dương",sl:"Thổ Tú",hn:"Toán Tận",hl:"Huỳnh Tuyền"},1996:{sn:"Thái Bạch",sl:"Thái Âm",hn:"Thiên Tinh",hl:"Tam Kheo"},1997:{sn:"Thủy Diệu",sl:"Mộc Đức",hn:"Ngũ Mộ",hl:"Ngũ Mộ"},1998:{sn:"Thổ Tú",sl:"Vân Hớn",hn:"Ngũ Mộ",hl:"Ngũ Mộ"},1999:{sn:"La Hầu",sl:"Kế Đô",hn:"Tam Kheo",hl:"Thiên Tinh"},2000:{sn:"Mộc Đức",sl:"Thủy Diệu",hn:"Huỳnh Tuyền",hl:"Toán Tận"},2001:{sn:"Thái Âm",sl:"Thái Bạch",hn:"Diêm Vương",hl:"Thiên La"},2002:{sn:"Kế Đô",sl:"Thái Dương",hn:"Địa Võng",hl:"Địa Võng"},2003:{sn:"Vân Hớn",sl:"La Hầu",hn:"Thiên La",hl:"Diêm Vương"},2004:{sn:"Thái Dương",sl:"Thổ Tú",hn:"Toán Tận",hl:"Huỳnh Tuyền"},2005:{sn:"Thái Bạch",sl:"Thái Âm",hn:"Thiên Tinh",hl:"Tam Kheo"},2006:{sn:"Thủy Diệu",sl:"Mộc Đức",hn:"Ngũ Mộ",hl:"Ngũ Mộ"},2007:{sn:"Thổ Tú",sl:"Vân Hớn",hn:"Tam Kheo",hl:"Thiên Tinh"}};
+            function calculate() {
+                const b = parseInt(document.getElementById('birthYear').value);
+                const g = document.getElementById('gender').value;
+                const t = 2026 - b + 1;
+                if(!b || b > 2026) return;
+                document.getElementById('resTuoiMu').innerText = t + " Tuổi Mụ";
+                const cans = ["Canh","Tân","Nhâm","Quý","Giáp","Ất","Bính","Đinh","Mậu","Kỷ"];
+                const chis = ["Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"];
+                const can = cans[b % 10];
+                let idx = (b - 4) % 12;
+                const chi = chis[idx < 0 ? idx + 12 : idx];
+                document.getElementById('resCanChi').innerText = can + " " + chi;
+                const d = DATA_2026[b];
+                if(d) {
+                    document.getElementById('resSao').innerText = (g==='nam' ? "S. " + d.sn : "S. " + d.sl);
+                    document.getElementById('resHanNien').innerText = (g==='nam' ? "H. " + d.hn : "H. " + d.hl);
+                }
+                const tamtai = ["Hợi","Mão","Mùi"].includes(chi);
+                document.getElementById('resTamTai').innerText = tamtai ? "Phạm Tam Tai" : "Không phạm";
+                document.getElementById('resTamTai').className = "text-[13px] font-black " + (tamtai ? "text-red-600" : "text-green-600");
+                let th = "Không phạm";
+                if(chi==="Ngọ") th="Trực Thái Tuế"; else if(chi==="Tý") th="Xung Thái Tuế";
+                document.getElementById('resThaiTue').innerText = th;
+                document.getElementById('resThaiTue').className = "text-[13px] font-black " + (th==="Không phạm" ? "text-green-600" : "text-red-600");
+                const kl = t % 9;
+                const isKL = [1,3,6,8].includes(kl) && t > 10;
+                document.getElementById('resKimLau').innerText = isKL ? "Phạm Kim Lâu" : "Không phạm";
+                document.getElementById('resKimLau').className = "text-[13px] font-black " + (isKL ? "text-red-600" : "text-green-600");
+                const hoArr = ["1. Nhất Cát (Tốt)","2. Nhì Nghi (Tốt)","3. Tam Địa Sát (Xấu)","4. Tứ Tấn Tài (Tốt)","5. Ngũ Thọ Tử (Xấu)","6. Lục Hoang Ốc (Xấu)"];
+                let cx=Math.floor(t/10),v=t%10,hIdx=(cx+v-1)%6;
+                if(v===0) hIdx=(cx-1)%6; if(t<10) hIdx=(t-1)%6;
+                const isHO = [2,4,5].includes(hIdx);
+                document.getElementById('resHoangOc').innerText = hoArr[hIdx];
+                document.getElementById('resHoangOc').className = "text-[13px] font-black " + (isHO ? "text-red-600" : "text-green-600");
+                document.getElementById('resultArea').classList.remove('hidden');
+            }
+        </script>
         </div>
 
         <div class="text-center py-8 bg-[#1a1c2e] rounded-[30px] mt-8 shadow-xl">
