@@ -248,7 +248,33 @@
                 <div class="w-12 flex justify-center text-gray-800"><i class="fa-brands fa-tiktok text-3xl"></i></div>
                 <div class="ml-4 text-left"><p class="font-black text-[16px] uppercase text-gray-800 leading-none">TIKTOK (KÊNH 2)</p></div>
             </a>
-         
+         <div class="max-w-md mx-auto bg-white rounded-3xl shadow-lg p-6 mb-8 border border-gray-100">
+    <h2 class="text-2xl font-bold text-center text-[#1e40af] mb-6 uppercase">Tra Cứu Hạn 2026</h2>
+    <div class="space-y-4">
+        <input type="number" id="birthYear" placeholder="Nhập năm sinh (VD: 1971)" class="w-full p-4 bg-gray-50 rounded-2xl text-lg font-bold text-center outline-none border-none bg-gray-100">
+        <button onclick="calculate()" class="w-full bg-[#2563eb] text-white font-bold py-4 rounded-2xl text-lg uppercase shadow-md">XEM KẾT QUẢ CHUẨN</button>
+    </div>
+    <div id="resultArea" class="hidden mt-6 pt-6 border-t border-dashed border-gray-200">
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <div id="resTuoiMu" class="p-3 bg-[#eff6ff] rounded-xl text-center text-[#1e40af] font-bold text-lg"></div>
+            <div id="resCanChi" class="p-3 bg-[#eff6ff] rounded-xl text-center text-[#1e40af] font-bold text-lg"></div>
+        </div>
+        <div class="space-y-4">
+            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-xl">
+                <span>Sao Chiếu Mệnh</span>
+                <span id="resSao" class="font-bold text-[#dc2626] text-lg"></span>
+            </div>
+            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-xl">
+                <span>Hạn Niên</span>
+                <span id="resHanNien" class="font-bold text-[#dc2626] text-lg"></span>
+            </div>
+            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-xl"><span>Tam Tai</span><span id="resTamTai" class="font-bold"></span></div>
+            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-xl"><span>Thái Tuế</span><span id="resThaiTue" class="font-bold"></span></div>
+            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-xl"><span>Kim Lâu</span><span id="resKimLau" class="font-bold"></span></div>
+            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-xl"><span>Hoang Ốc</span><span id="resHoangOc" class="font-bold"></span></div>
+        </div>
+    </div>
+</div>
 <script>
         // DỮ LIỆU SAO HẠN 2026 ĐÃ ĐƯỢC KIỂM TRA THEO BẢNG CHUẨN CỦA NGƯỜI DÙNG
         const DATA_2026 = {
