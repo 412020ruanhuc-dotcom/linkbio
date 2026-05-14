@@ -248,58 +248,7 @@
                 <div class="w-12 flex justify-center text-gray-800"><i class="fa-brands fa-tiktok text-3xl"></i></div>
                 <div class="ml-4 text-left"><p class="font-black text-[16px] uppercase text-gray-800 leading-none">TIKTOK (KÊNH 2)</p></div>
             </a>
-            <div class="max-w-md mx-auto bg-white rounded-3xl shadow-lg p-6 mb-8 border border-gray-100">
-    <h2 class="text-2xl font-bold text-center text-[#1e40af] mb-6 uppercase">Tra Cứu Hạn 2026</h2>
-    <div class="space-y-4">
-        <input type="number" id="birthYear" placeholder="Nhập năm sinh (VD: 1971)" class="w-full p-4 bg-gray-50 rounded-2xl text-lg font-bold text-center outline-none border-none bg-gray-100">
-        <button onclick="calculate()" class="w-full bg-[#2563eb] text-white font-bold py-4 rounded-2xl text-lg uppercase shadow-md">XEM KẾT QUẢ CHUẨN</button>
-    </div>
-    <div id="resultArea" class="hidden mt-6 pt-6 border-t border-dashed border-gray-200">
-        <div class="grid grid-cols-2 gap-4 mb-6">
-            <div id="resTuoiMu" class="p-3 bg-[#eff6ff] rounded-xl text-center text-[#1e40af] font-bold text-lg"></div>
-            <div id="resCanChi" class="p-3 bg-[#eff6ff] rounded-xl text-center text-[#1e40af] font-bold text-lg"></div>
-        </div>
-        <div class="space-y-4">
-            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-xl">
-                <span>Sao Chiếu Mệnh</span>
-                <span id="resSao" class="font-bold text-[#dc2626] text-lg"></span>
-            </div>
-            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-xl">
-                <span>Hạn Niên</span>
-                <span id="resHanNien" class="font-bold text-[#dc2626] text-lg"></span>
-            </div>
-            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-xl"><span>Tam Tai</span><span id="resTamTai" class="font-bold"></span></div>
-            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-xl"><span>Thái Tuế</span><span id="resThaiTue" class="font-bold"></span></div>
-            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-xl"><span>Kim Lâu</span><span id="resKimLau" class="font-bold"></span></div>
-            <div class="flex justify-between items-center p-4 bg-gray-50 rounded-xl"><span>Hoang Ốc</span><span id="resHoangOc" class="font-bold"></span></div>
-        </div>
-    </div>
-</div>
-
-<script>
-const DATA_2026 = {
-    "1971": {sn: "Thổ Tú", hn: "Ngũ Mộ", tt: "Không", th: "Không", kl: "Không", ho: "Không"},
-    "1972": {sn: "Mộc Đức", hn: "Huỳnh Tuyền", tt: "Phạm", th: "Không", kl: "Không", ho: "Không"},
-    "1984": {sn: "Vân Hớn", hn: "Thiên La", tt: "Không", th: "Không", kl: "Phạm", ho: "Phạm"}
-    // Anh dán thêm các năm khác của anh vào đây
-};
-
-function calculate() {
-    const year = document.getElementById('birthYear').value;
-    const data = DATA_2026[year];
-    if(!data) { alert('Dữ liệu năm này đang cập nhật!'); return; }
-    
-    document.getElementById('resTuoiMu').innerText = (2026 - year + 1) + " Tuổi Mụ";
-    document.getElementById('resCanChi').innerText = "Tuổi " + year;
-    document.getElementById('resSao').innerText = data.sn;
-    document.getElementById('resHanNien').innerText = data.hn;
-    document.getElementById('resTamTai').innerText = data.tt;
-    document.getElementById('resThaiTue').innerText = data.th;
-    document.getElementById('resKimLau').innerText = data.kl;
-    document.getElementById('resHoangOc').innerText = data.ho;
-    document.getElementById('resultArea').classList.remove('hidden');
-}
-</script>
+           
          <div class="text-center py-8 bg-[#1a1c2e] rounded-[30px] mt-8 shadow-xl">
             <p class="text-xl text-yellow-400 font-black uppercase italic mb-1">THAY TƯ DUY ĐỔI VẬN MỆNH</p>
             <p class="text-gray-500 text-[9px] font-bold uppercase tracking-[0.4em]">© 2026 MẬT MÃ CUỘC ĐỜI</p>
