@@ -276,7 +276,28 @@
     </div>
 </div>
 <script>
-   
+   <script>
+function calculate() {
+    const year = document.getElementById('birthYear').value;
+    const data = DATA_2026[year];
+    if(!data) { 
+        alert('Vui lòng nhập năm sinh chuẩn!'); 
+        return; 
+    }
+
+    // Đổ dữ liệu vào bảng
+    document.getElementById('resTuoiMu').innerText = (2026 - year + 1) + " Tuổi Mụ";
+    document.getElementById('resCanChi').innerText = data.cc || "Cập nhật";
+    document.getElementById('resSao').innerText = data.sn;
+    document.getElementById('resHanNien').innerText = data.hn;
+    document.getElementById('resTamTai').innerText = data.tt || "Không phạm";
+    document.getElementById('resThaiTue').innerText = data.th || "Không phạm";
+    document.getElementById('resKimLau').innerText = data.kl || "Không phạm";
+    document.getElementById('resHoangOc').innerText = data.ho || "Không phạm";
+    
+    // Hiện bảng kết quả
+    document.getElementById('resultArea').classList.remove('hidden');
+}
         const DATA_2026 = {
             1948: {sn:"Kế Đô", sl:"Thái Dương", hn:"Diêm Vương", hl:"Thiên La"},
             1960: {sn:"Thái Bạch", sl:"Thái Âm", hn:"Toán Tận", hl:"Huỳnh Tuyền"},
