@@ -233,5 +233,87 @@
             document.getElementById('resultArea').classList.remove('hidden');
         }
     </script>
+  <script>
+function processSaoHan() {
+    const birthYearInput = document.getElementById('birthYear') || document.querySelector('input[type="number"]');
+    const viewYearInput = document.getElementById('viewYear') || document.querySelectorAll('input[type="number"]')[1];
+    const genderSelect = document.getElementById('gender') || document.querySelector('select');
+    const resultArea = document.getElementById('resultArea') || document.getElementById('result') || document.querySelector('.result-wrapper');
+
+    if (!birthYearInput || !viewYearInput || !resultArea) {
+        alert("Lỗi: Không tìm thấy các ô nhập liệu hoặc vùng hiển thị kết quả trong mã của bạn!");
+        return;
+    }
+
+    const birthYear = parseInt(birthYearInput.value);
+    const viewYear = parseInt(viewYearInput.value);
+    const gender = genderSelect ? genderSelect.value : 'nam';
+
+    if (!birthYear || !viewYear) {
+        alert("Vui lòng nhập đầy đủ năm sinh!");
+        return;
+    }
+
+    const tuoiMu = viewYear - birthYear + 1;
+
+    // 1. MẢNG DỮ LIỆU SAO CHIẾU MỆNH
+    const saoNam = ["La Hầu", "Thổ Tú", "Thủy Diệu", "Thái Bạch", "Thái Âm", "Mộc Đức", "Gia Đô", "Vân Hớn", "Kế Đô"];
+    const saoNu = ["Kế Đô", "Vân Hớn", "Mộc Đức", "Thái Âm", "Thái Bạch", "Thủy Diệu", "Thổ Tú", "La Hầu", "Gia Đô"];
+    const chiSoSao = (tuoiMu - 10) % 9;
+    const tenSao = chiSoSao >= 0 ? (gender === 'nam' ? saoNam[chiSoSao] : saoNu[chiSoSao]) : "Chưa tính được";
+
+    // 2. MẢNG DỮ LIỆU HẠN NIÊN
+    const hanNam = ["Tam Kheo", "Ngũ Mộ", "Thiên Tinh", "Tán Tận", "Huỳnh Tuyền", "Diêm Vương", "Nguyễn Đức", "Toán Tận"];
+    const hanNu = ["Thiên La", "Ngũ Mộ", "Tam Kheo", "Cú Phùng", "Huỳnh Tuyền", "Diêm Vương", "Thiên Tinh", "Toán Tận"];
+    const chiSoHan = (tuoiMu - 10) % 8;
+    const tenHan = chiSoHan >= 0 ? (gender === 'nam' ? hanNam[chiSoHan] : hanNu[chiSoHan]) : "Chưa tính được";
+
+    // 3. TÍNH TAM TAI
+    const diaChi = ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"];
+    const chiNamSinh = diaChi[(birthYear - 4) % 12];
+    let tamTaiStatus = "Không Phạm";
+    if (["Thân", "Tý", "Thìn"].includes(chiNamSinh)) tamTaiStatus = "Phạm Tam Tai (Năm 2)";
+    else if (["Dần", "Ngọ", "Tuất"].includes(chiNamSinh)) tamTaiStatus = "Không Phạm";
+    else if (["Hợi", "Mão", "Mùi"].includes(chiNamSinh)) tamTaiStatus = "Không Phạm";
+    else if (["Tỵ", "Dậu", "Sửu"].includes(chiNamSinh)) tamTaiStatus = "Không Phạm";
+
+    // HIỂN THỊ KẾT QUẢ RA 2 CỘT CHỮ ĐỎ CHUẨN ĐẸP VÀO KHUNG CỦA BẠN
+    resultArea.style.display = "grid";
+    resultArea.style.gridTemplateColumns = "repeat(2, 1fr)";
+    resultArea.style.gap = "12px";
+    resultArea.style.marginTop = "20px";
+
+    resultArea.innerHTML = `
+        <div style="background: #ffffff; border: 1px solid #f1f5f9; border-radius: 12px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); text-align: left;">
+            <span style="font-size: 0.75rem; font-weight: bold; color: #64748b; text-transform: uppercase;">Sao Chiếu Mệnh</span>
+            <div style="color: #b91c1c; font-weight: bold; margin-top: 4px; font-size: 1.1rem;">${tenSao}</div>
+        </div>
+        <div style="background: #ffffff; border: 1px solid #f1f5f9; border-radius: 12px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); text-align: left;">
+            <span style="font-size: 0.75rem; font-weight: bold; color: #64748b; text-transform: uppercase;">Hạn Niên</span>
+            <div style="color: #b91c1c; font-weight: bold; margin-top: 4px; font-size: 1.1rem;">${tenHan}</div>
+        </div>
+        <div style="background: #ffffff; border: 1px solid #f1f5f9; border-radius: 12px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); text-align: left;">
+            <span style="font-size: 0.75rem; font-weight: bold; color: #64748b; text-transform: uppercase;">Tam Tai</span>
+            <div style="color: #b91c1c; font-weight: bold; margin-top: 4px;">${tamTaiStatus}</div>
+        </div>
+        <div style="background: #ffffff; border: 1px solid #f1f5f9; border-radius: 12px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); text-align: left;">
+            <span style="font-size: 0.75rem; font-weight: bold; color: #64748b; text-transform: uppercase;">Kim Lâu</span>
+            <div style="color: #b91c1c; font-weight: bold; margin-top: 4px;">Tính theo tuổi mụ</div>
+        </div>
+        <div style="grid-column: span 2 / span 2; background-color: #121620; border-radius: 16px; padding: 14px; text-align: center; color: white; margin-top: 8px;">
+            <div style="color: #facc15; font-size: 1.3rem; font-weight: bold;">${tuoiMu} Tuổi Mụ</div>
+        </div>
+    `;
+}
+
+// Gắn sự kiện kích hoạt vào nút bấm của bạn khi trang tải xong
+window.addEventListener('DOMContentLoaded', () => {
+    const btn = document.querySelector('button');
+    if (btn) {
+        btn.setAttribute('onclick', 'processSaoHan()');
+    }
+});
+</script>
+
 </body>
 </html>
