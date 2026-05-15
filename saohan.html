@@ -233,5 +233,14 @@
             document.getElementById('resultArea').classList.remove('hidden');
         }
     </script>
+    // DÁN VÀO TRONG HÀM ĐỂ TỰ ĐỘNG LÀM NHẤP NHÁY TIÊU ĐỀ NGUYÊN BẢN CỦA BẠN
+const h2Title = document.querySelector('h2');
+if (h2Title) {
+    h2Title.style.animation = "blinkEffect 1.5s infinite ease-in-out";
+    const blinkStyle = document.createElement('style');
+    blinkStyle.innerHTML = "@keyframes blinkEffect { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }";
+    document.head.appendChild(blinkStyle);
+}
+
 </body>
 </html>
