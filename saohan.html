@@ -235,14 +235,49 @@
             document.getElementById('resultArea').classList.remove('hidden');
         }
     </script>
-    // DÁN VÀO TRONG HÀM ĐỂ TỰ ĐỘNG LÀM NHẤP NHÁY TIÊU ĐỀ NGUYÊN BẢN CỦA BẠN
-const h2Title = document.querySelector('h2');
-if (h2Title) {
-    h2Title.style.animation = "blinkEffect 1.5s infinite ease-in-out";
-    const blinkStyle = document.createElement('style');
-    blinkStyle.innerHTML = "@keyframes blinkEffect { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }";
-    document.head.appendChild(blinkStyle);
-}
+  
+    <!-- ======================================================= -->
+    <!-- ĐOẠN MÃ ĐÓNG MỞ THÔNG MINH (DÁN TRÊN THẺ BODY CHẶN ĐÁY) -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const mainCard = document.querySelector('div') || document.body.firstElementChild;
+        if (!mainCard) return;
+
+        // 1. Tự động tạo nút bấm Đóng/Mở nằm trên đầu bảng tra cứu gốc của bạn
+        const toggleBtn = document.createElement('button');
+        toggleBtn.innerHTML = "👉 BẤM VÀO ĐÂY ĐỂ TRA CỨU SAO HẠN 2026 👈";
+        toggleBtn.style.cssText = "display: block; width: 100%; max-width: 440px; margin: 15px auto; background: #b91c1c; color: white; border: none; padding: 14px; font-size: 1.1rem; font-weight: bold; border-radius: 16px; cursor: pointer; text-transform: uppercase; box-shadow: 0 4px 15px rgba(185,28,28,0.3);";
+        mainCard.parentNode.insertBefore(toggleBtn, mainCard);
+
+        // 2. Mặc định ban đầu ẩn bảng kết quả đi để xóa sạch khoảng trống thừa trên trang chính
+        mainCard.style.display = 'none';
+        if (window.parent && window.parent.document.getElementById('iframeSaoHan')) {
+            window.parent.document.getElementById('iframeSaoHan').style.height = "160px"; // Chiều cao vừa khít nút và chữ nhấp nháy
+        }
+
+        // 3. Xử lý hành động Đóng / Mở khi người dùng click chuột
+        toggleBtn.addEventListener('click', function () {
+            if (mainCard.style.display === 'none') {
+                // HÀNH ĐỘNG: BẤM BUNG RA
+                mainCard.style.display = 'block';
+                toggleBtn.innerHTML = "❌ ĐÓNG LẠI ĐỂ XEM PHẦN KHÁC ❌";
+                toggleBtn.style.background = "#121620";
+                if (window.parent && window.parent.document.getElementById('iframeSaoHan')) {
+                    window.parent.document.getElementById('iframeSaoHan').style.height = "850px"; // Nở rộng khung hiện trọn khối đen tuổi mụ
+                }
+            } else {
+                // HÀNH ĐỘNG: BẤM ĐÓNG LẠI
+                mainCard.style.display = 'none';
+                toggleBtn.innerHTML = "👉 BẤM VÀO ĐÂY ĐỂ TRA CỨU SAO HẠN 2026 👈";
+                toggleBtn.style.background = "#b91c1c";
+                if (window.parent && window.parent.document.getElementById('iframeSaoHan')) {
+                    window.parent.document.getElementById('iframeSaoHan').style.height = "160px"; // Thu nhỏ biến mất hoàn toàn khoảng trống
+                }
+            }
+        });
+    });
+    </script>
+    <!-- ======================================================= -->
 
 </body>
 </html>
