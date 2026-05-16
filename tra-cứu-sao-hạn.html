@@ -187,7 +187,6 @@
             }
 
             // 3. TAM TAI 2026 (Năm Bính Ngọ)
-            // Nhóm phạm Tam Tai năm Ngọ là Hợi - Mão - Mùi
             const nhomTamTai = ["Hợi", "Mão", "Mùi"];
             let ttText = "Không phạm";
             let ttClass = "good-news";
@@ -211,8 +210,6 @@
             // 5. KIM LÂU
             const klDu = tuoiMu % 9;
             let klText = "Không phạm";
-            // Các tuổi mụ không tính Kim Lâu: 12, 14, 16, 18 (theo một số phái) 
-            // Nhưng chuẩn phổ thông là tính hết các năm có số dư 1,3,6,8
             if ([1, 3, 6, 8].includes(klDu) && tuoiMu > 10) {
                 const types = {1:"Thân", 3:"Thê", 6:"Tử", 8:"Súc"};
                 klText = "Phạm Kim Lâu " + types[klDu];
@@ -223,12 +220,10 @@
             document.getElementById('resKimLau').innerText = klText;
 
             // 6. HOANG ỐC
-            // Cách tính: 10 tuổi bắt đầu tại Nhất Cát, 20 Nhì Nghi... đếm tiếp lẻ
             const hoLabels = ["1. Nhất Cát (Tốt)", "2. Nhì Nghi (Tốt)", "3. Tam Địa Sát (Xấu)", "4. Tứ Tấn Tài (Tốt)", "5. Ngũ Thọ Tử (Xấu)", "6. Lục Hoang Ốc (Xấu)"];
             let chuc = Math.floor(tuoiMu / 10);
             let donvi = tuoiMu % 10;
             let hoIdx = (chuc + donvi - 1) % 6;
-            // Xử lý trường hợp tuổi tròn (vd 20, 30) hoặc tuổi < 10
             if (donvi === 0) hoIdx = (chuc - 1) % 6;
             if (tuoiMu < 10) hoIdx = (tuoiMu - 1) % 6;
 
