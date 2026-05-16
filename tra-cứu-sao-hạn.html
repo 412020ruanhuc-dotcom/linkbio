@@ -83,7 +83,9 @@
     </div>
 
     <script>
-        // DỮ LIỆU SAO HẠN 2026 ĐÃ ĐƯỢC KIỂM TRA THEO BẢNG CHUẨN CỦA NGƯỜI DÙNG
+        // PHẦN LOGIC ĐÃ ĐƯỢC MÃ HÓA BẢO MẬT RIÊNG - GIAO DIỆN BÊN TRÊN GIỮ NGUYÊN
+        const _0x1a2b=["innerText","getElementById","birthYear","value","currentYear","gender","resTuoiMu","Tuổi Mụ","resCanChi","resSao","nam","S. ","sn","sl","resHanNien","H. ","hn","hl","Xem bảng phụ","includes","Phạm Tam Tai (Năm 2)","bad-news","Không phạm","good-news","resTamTai","className","text-lg ","Ngọ","Trực Thái Tuế","Tý","Xung Thái Tuế","Mão","Hình Thái Tuế","Sửu","Hại Thái Tuế","resThaiTue","Phạm Kim Lâu ","resKimLau","resHoangOc","resultArea","classList","remove","hidden"];function calculate(){const e=parseInt(document[_0x1a2b[1]](_0x1a2b[2])[_0x1a2b[3]]),t=2026,a=document[_0x1a2b[1]](_0x1a2b[5])[_0x1a2b[3]],n=t-e+1;if(!e||e>2026)return;document[_0x1a2b[1]](_0x1a2b[6])[_0x1a2b[0]]=n+" "+_0x1a2b[7];const s=["Canh","Tân","Nhâm","Quý","Giáp","Ất","Bính","Đinh","Mậu","Kỷ"],r=["Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"],c=s[e%10];let o=(e-4)%12;o=o<0?o+12:o;const l=r[o];document[_0x1a2b[1]](_0x1a2b[8])[_0x1a2b[0]]=c+" "+l;const u=DATA_2026[e];if(u){document[_0x1a2b[1]](_0x1a2b[9])[_0x1a2b[0]]=a===_0x1a2b[10]?_0x1a2b[11]+u[_0x1a2b[12]]:_0x1a2b[11]+u[_0x1a2b[13]],document[_0x1a2b[1]](_0x1a2b[14])[_0x1a2b[0]]=a===_0x1a2b[10]?_0x1a2b[15]+u[_0x1a2b[16]]:_0x1a2b[15]+u[_0x1a2b[17]]}else document[_0x1a2b[1]](_0x1a2b[9])[_0x1a2b[0]]=_0x1a2b[18],document[_0x1a2b[1]](_0x1a2b[14])[_0x1a2b[0]]=_0x1a2b[18];const i=["Hợi","Mão","Mùi"];let m=_0x1a2b[22],g=_0x1a2b[23];i[_0x1a2b[19]](l)&&(m=_0x1a2b[20],g=_0x1a2b[21]),document[_0x1a2b[1]](_0x1a2b[24])[_0x1a2b[0]]=m,document[_0x1a2b[1]](_0x1a2b[24])[_0x1a2b[25]]=_0x1a2b[26]+g;let d=_0x1a2b[22];l===_0x1a2b[27]?d=_0x1a2b[28]:l===_0x1a2b[29]?d=_0x1a2b[30]:l===_0x1a2b[31]?d=_0x1a2b[32]:l===_0x1a2b[33]&&(d=_0x1a2b[34]),document[_0x1a2b[1]](_0x1a2b[35])[_0x1a2b[0]]=d,document[_0x1a2b[1]](_0x1a2b[35])[_0x1a2b[25]]=_0x1a2b[26]+(d===_0x1a2b[22]?_0x1a2b[23]:_0x1a2b[21]);const h=n%9;let b=_0x1a2b[22];if([1,3,6,8][_0x1a2b[19]](h)&&n>10){const e={1:"Thân",3:"Thê",6:"Tử",8:"Súc"};b=_0x1a2b[36]+e[h],document[_0x1a2b[1]](_0x1a2b[37])[_0x1a2b[25]]=_0x1a2b[26]+_0x1a2b[21]}else document[_0x1a2b[1]](_0x1a2b[37])[_0x1a2b[25]]=_0x1a2b[26]+_0x1a2b[23];document[_0x1a2b[1]](_0x1a2b[37])[_0x1a2b[0]]=b;const T=["1. Nhất Cát (Tốt)","2. Nhì Nghi (Tốt)","3. Tam Địa Sát (Xấu)","4. Tứ Tấn Tài (Tốt)","5. Ngũ Thọ Tử (Xấu)","6. Lục Hoang Ốc (Xấu)"];let v=Math.floor(n/10),O=n%10,x=(v+O-1)%6;0===O&&(x=(v-1)%6),n<10&&(x=(n-1)%6),document[_0x1a2b[1]](_0x1a2b[38])[_0x1a2b[0]]=T[x],document[_0x1a2b[1]](_0x1a2b[38])[_0x1a2b[25]]=_0x1a2b[26]+([2,4,5][_0x1a2b[19]](x)?_0x1a2b[21]:_0x1a2b[23]),document[_0x1a2b[1]](_0x1a2b[39])[_0x1a2b[40]][_0x1a2b[41]](_0x1a2b[42])}
+        // GIỮ LẠI BẢNG TRA CỨU ĐỂ HỆ THỐNG ĐỌC ĐƯỢC ĐÚNG
         const DATA_2026 = {
             1948: {sn:"Kế Đô", sl:"Thái Dương", hn:"Diêm Vương", hl:"Thiên La"},
             1960: {sn:"Thái Bạch", sl:"Thái Âm", hn:"Toán Tận", hl:"Huỳnh Tuyền"},
@@ -157,81 +159,6 @@
             1995: {sn:"Thái Dương", sl:"Thổ Tú", hn:"Toán Tận", hl:"Huỳnh Tuyền"},
             2007: {sn:"Thổ Tú", sl:"Vân Hớn", hn:"Tam Kheo", hl:"Thiên Tinh"}
         };
-
-        const chiNames = ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"];
-        const canNames = ["Canh", "Tân", "Nhâm", "Quý", "Giáp", "Ất", "Bính", "Đinh", "Mậu", "Kỷ"];
-
-        function calculate() {
-            const birthYear = parseInt(document.getElementById('birthYear').value);
-            const currentYear = 2026;
-            const gender = document.getElementById('gender').value;
-            const tuoiMu = currentYear - birthYear + 1;
-
-            if (!birthYear || birthYear > 2026) return;
-
-            // 1. TUỔI MỤ & CAN CHI
-            document.getElementById('resTuoiMu').innerText = tuoiMu + " Tuổi Mụ";
-            const can = canNames[birthYear % 10];
-            const chiIndex = (birthYear - 4) % 12;
-            const chi = chiNames[chiIndex < 0 ? chiIndex + 12 : chiIndex];
-            document.getElementById('resCanChi').innerText = can + " " + chi;
-
-            // 2. SAO & HẠN (Dữ liệu chuẩn 2026)
-            const data = DATA_2026[birthYear];
-            if (data) {
-                document.getElementById('resSao').innerText = (gender === 'nam' ? "S. " + data.sn : "S. " + data.sl);
-                document.getElementById('resHanNien').innerText = (gender === 'nam' ? "H. " + data.hn : "H. " + data.hl);
-            } else {
-                document.getElementById('resSao').innerText = "Xem bảng phụ";
-                document.getElementById('resHanNien').innerText = "Xem bảng phụ";
-            }
-
-            // 3. TAM TAI 2026 (Năm Bính Ngọ)
-            const nhomTamTai = ["Hợi", "Mão", "Mùi"];
-            let ttText = "Không phạm";
-            let ttClass = "good-news";
-            if (nhomTamTai.includes(chi)) {
-                ttText = "Phạm Tam Tai (Năm 2)";
-                ttClass = "bad-news";
-            }
-            document.getElementById('resTamTai').innerText = ttText;
-            document.getElementById('resTamTai').className = "text-lg " + ttClass;
-
-            // 4. THÁI TUẾ 2026 (Năm Bính Ngọ)
-            let thText = "Không phạm";
-            if (chi === "Ngọ") thText = "Trực Thái Tuế";
-            else if (chi === "Tý") thText = "Xung Thái Tuế";
-            else if (chi === "Mão") thText = "Hình Thái Tuế";
-            else if (chi === "Sửu") thText = "Hại Thái Tuế";
-            
-            document.getElementById('resThaiTue').innerText = thText;
-            document.getElementById('resThaiTue').className = "text-lg " + (thText === "Không phạm" ? "good-news" : "bad-news");
-
-            // 5. KIM LÂU
-            const klDu = tuoiMu % 9;
-            let klText = "Không phạm";
-            if ([1, 3, 6, 8].includes(klDu) && tuoiMu > 10) {
-                const types = {1:"Thân", 3:"Thê", 6:"Tử", 8:"Súc"};
-                klText = "Phạm Kim Lâu " + types[klDu];
-                document.getElementById('resKimLau').className = "text-lg bad-news";
-            } else {
-                document.getElementById('resKimLau').className = "text-lg good-news";
-            }
-            document.getElementById('resKimLau').innerText = klText;
-
-            // 6. HOANG ỐC
-            const hoLabels = ["1. Nhất Cát (Tốt)", "2. Nhì Nghi (Tốt)", "3. Tam Địa Sát (Xấu)", "4. Tứ Tấn Tài (Tốt)", "5. Ngũ Thọ Tử (Xấu)", "6. Lục Hoang Ốc (Xấu)"];
-            let chuc = Math.floor(tuoiMu / 10);
-            let donvi = tuoiMu % 10;
-            let hoIdx = (chuc + donvi - 1) % 6;
-            if (donvi === 0) hoIdx = (chuc - 1) % 6;
-            if (tuoiMu < 10) hoIdx = (tuoiMu - 1) % 6;
-
-            document.getElementById('resHoangOc').innerText = hoLabels[hoIdx];
-            document.getElementById('resHoangOc').className = "text-lg " + ([2, 4, 5].includes(hoIdx) ? "bad-news" : "good-news");
-
-            document.getElementById('resultArea').classList.remove('hidden');
-        }
     </script>
 </body>
 </html>
