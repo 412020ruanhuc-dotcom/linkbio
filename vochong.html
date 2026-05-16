@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xem Hợp Tuổi - Bản Đẹp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #f0f2f5; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .main-card { background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-top: 6px solid #1e40af; }
+        .input-group { background: #f1f5f9; border-radius: 12px; padding: 15px; border: 1px solid #e2e8f0; }
+        .result-card { background: #ffffff; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; }
+        .score-good { color: #059669; font-weight: bold; }
+        .score-bad { color: #dc2626; font-weight: bold; }
+        .section-title { background: #1e40af; color: white; padding: 8px 15px; font-size: 0.9rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="main-card w-full max-w-lg p-6 md:p-8">
+        <h2 class="text-2xl font-black text-center text-blue-800 mb-8 uppercase tracking-wide">Xem Hợp Tuổi Bản Mệnh</h2>
+        
+        <div class="space-y-6">
+            <!-- Người thứ nhất -->
+            <div class="input-group">
+                <label class="block text-blue-900 font-bold mb-2 flex items-center">
+                    <span class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center mr-2 text-xs">1</span>
+                    Năm sinh người thứ nhất:
+                </label>
+                <input type="number" id="year1" placeholder="Ví dụ: 1984" 
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-xl text-center font-bold">
+            </div>
+
+            <!-- Người thứ hai -->
+            <div class="input-group">
+                <label class="block text-red-900 font-bold mb-2 flex items-center">
+                    <span class="w-6 h-6 bg-red-600 text-white rounded-full flex items-center justify-center mr-2 text-xs">2</span>
+                    Năm sinh người thứ hai:
+                </label>
+                <input type="number" id="year2" placeholder="Ví dụ: 1988" 
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 outline-none text-xl text-center font-bold">
+            </div>
+
+            <button onclick="compareYears()" class="w-full bg-blue-800 hover:bg-blue-900 text-white font-black py-4 rounded-xl transition duration-300 uppercase shadow-xl text-lg tracking-widest">
+                Kiểm Tra Độ Hợp
+            </button>
+        </div>
+
+        <div id="resultArea" class="hidden mt-10 space-y-6">
+            
+            <!-- Bảng so sánh Can Chi & Ngũ Hành -->
+            <div class="result-card shadow-md">
+                <div class="section-title">Phân Tích Bản Mệnh</div>
+                <div class="p-4 space-y-3">
+                    <div class="flex justify-between items-center border-b pb-2">
+                        <span class="text-gray-500">Mệnh Người 1:</span>
+                        <span id="p1Mệnh" class="font-bold text-gray-800"></span>
+                    </div>
+                    <div class="flex justify-between items-center border-b pb-2">
+                        <span class="text-gray-500">Mệnh Người 2:</span>
+                        <span id="p2Mệnh" class="font-bold text-gray-800"></span>
+                    </div>
+                    <div class="p-3 bg-blue-50 rounded-lg text-center mt-2">
+                        <p class="text-xs font-bold text-blue-600 uppercase mb-1">Kết luận Ngũ Hành</p>
+                        <p id="resNguHanh" class="font-bold text-gray-900"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bảng so sánh Cung Phi -->
+            <div class="result-card shadow-md">
+                <div class="section-title">Phân Tích Cung Phi (Bát Trạch)</div>
+                <div class="p-4">
+                    <div class="grid grid-cols-2 gap-4 text-center mb-4">
+                        <div class="bg-gray-50 p-3 rounded-lg border">
+                            <p class="text-[10px] font-bold text-gray-400 uppercase">Cung Nam (1)</p>
+                            <p id="p1Nam" class="text-lg font-black text-blue-700"></p>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-lg border">
+                            <p class="text-[10px] font-bold text-gray-400 uppercase">Cung Nữ (2)</p>
+                            <p id="p2Nu" class="text-lg font-black text-pink-700"></p>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-red-50 rounded-lg text-center border border-red-100">
+                        <p class="text-xs font-bold text-red-600 uppercase mb-1">Duyên phận Cung Phi</p>
+                        <p id="resCungPhi" class="text-lg font-black text-red-900"></p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-center text-xs text-gray-400 italic italic">Lưu ý: Kết quả chỉ mang tính chất tham khảo theo dân gian.</p>
+        </div>
+
+        <p id="errorMsg" class="hidden text-center text-red-500 mt-6 font-bold italic">Vui lòng nhập năm trong khoảng 1930 - 2069</p>
+    </div>
+
+    <script>
+        const data = {
+            "1930": ["Canh Ngọ", "Lộ Bàng Thổ", "Thổ", "Đoài", "Cấn"],
+            "1931": ["Tân Mùi", "Lộ Bàng Thổ", "Thổ", "Càn", "Ly"],
+            "1932": ["Nhâm Thân", "Kiếm Phong Kim", "Kim", "Khôn", "Khảm"],
+            "1933": ["Quý Dậu", "Kiếm Phong Kim", "Kim", "Tốn", "Khôn"],
+            "1934": ["Giáp Tuất", "Sơn Đầu Hỏa", "Hỏa", "Chấn", "Chấn"],
+            "1935": ["Ất Hợi", "Sơn Đầu Hỏa", "Hỏa", "Khôn", "Tốn"],
+            "1936": ["Bính Tý", "Giản Hạ Thủy", "Thủy", "Khảm", "Cấn"],
+            "1937": ["Đinh Sửu", "Giản Hạ Thủy", "Thủy", "Ly", "Càn"],
+            "1938": ["Mậu Dần", "Thành Đầu Thổ", "Thổ", "Cấn", "Đoài"],
+            "1939": ["Kỷ Mão", "Thành Đầu Thổ", "Thổ", "Đoài", "Cấn"],
+            "1940": ["Canh Thìn", "Bạch Lạp Kim", "Kim", "Càn", "Ly"],
+            "1941": ["Tân Tỵ", "Bạch Lạp Kim", "Kim", "Khôn", "Khảm"],
+            "1942": ["Nhâm Ngọ", "Dương Liễu Mộc", "Mộc", "Tốn", "Khôn"],
+            "1943": ["Quý Mùi", "Dương Liễu Mộc", "Mộc", "Chấn", "Chấn"],
+            "1944": ["Giáp Thân", "Tuyền Trung Thủy", "Thủy", "Khôn", "Tốn"],
+            "1945": ["Ất Dậu", "Tuyền Trung Thủy", "Thủy", "Khảm", "Cấn"],
+            "1946": ["Bính Tuất", "Ốc Thượng Thổ", "Thổ", "Ly", "Càn"],
+            "1947": ["Đinh Hợi", "Ốc Thượng Thổ", "Thổ", "Cấn", "Đoài"],
+            "1948": ["Mậu Tý", "Tích Lịch Hỏa", "Hỏa", "Đoài", "Cấn"],
+            "1949": ["Kỷ Sửu", "Tích Lịch Hỏa", "Hỏa", "Càn", "Ly"],
+            "1950": ["Canh Dần", "Tùng Bách Mộc", "Mộc", "Khôn", "Khảm"],
+            "1951": ["Tân Mão", "Tùng Bách Mộc", "Mộc", "Tốn", "Khôn"],
+            "1952": ["Nhâm Thìn", "Trường Lưu Thủy", "Thủy", "Chấn", "Chấn"],
+            "1953": ["Quý Tỵ", "Trường Lưu Thủy", "Thủy", "Khôn", "Tốn"],
+            "1954": ["Giáp Ngọ", "Sa Trung Kim", "Kim", "Khảm", "Cấn"],
+            "1955": ["Ất Mùi", "Sa Trung Kim", "Kim", "Ly", "Càn"],
+            "1956": ["Bính Thân", "Sơn Hạ Hỏa", "Hỏa", "Cấn", "Đoài"],
+            "1957": ["Đinh Dậu", "Sơn Hạ Hỏa", "Hỏa", "Đoài", "Cấn"],
+            "1958": ["Mậu Tuất", "Bình Địa Mộc", "Mộc", "Càn", "Ly"],
+            "1959": ["Kỷ Hợi", "Bình Địa Mộc", "Mộc", "Khôn", "Khảm"],
+            "1960": ["Canh Tý", "Bích Thượng Thổ", "Thổ", "Tốn", "Khôn"],
+            "1961": ["Tân Sửu", "Bích Thượng Thổ", "Thổ", "Chấn", "Chấn"],
+            "1962": ["Nhâm Dần", "Kim Bạch Kim", "Kim", "Khôn", "Tốn"],
+            "1963": ["Quý Mão", "Kim Bạch Kim", "Kim", "Khảm", "Cấn"],
+            "1964": ["Giáp Thìn", "Phúc Đăng Hỏa", "Hỏa", "Ly", "Càn"],
+            "1965": ["Ất Tỵ", "Phúc Đăng Hỏa", "Hỏa", "Cấn", "Đoài"],
+            "1966": ["Bính Ngọ", "Thiên Hà Thủy", "Thủy", "Đoài", "Cấn"],
+            "1967": ["Đinh Mùi", "Thiên Hà Thủy", "Thủy", "Càn", "Ly"],
+            "1968": ["Mậu Thân", "Đại Trạch Thổ", "Thổ", "Khôn", "Khảm"],
+            "1969": ["Kỷ Dậu", "Đại Trạch Thổ", "Thổ", "Tốn", "Khôn"],
+            "1970": ["Canh Tuất", "Thoa Xuyến Kim", "Kim", "Chấn", "Chấn"],
+            "1971": ["Tân Hợi", "Thoa Xuyến Kim", "Kim", "Khôn", "Tốn"],
+            "1972": ["Nhâm Tý", "Tang Đố Mộc", "Mộc", "Khảm", "Cấn"],
+            "1973": ["Quý Sửu", "Tang Đố Mộc", "Mộc", "Ly", "Càn"],
+            "1974": ["Giáp Dần", "Đại Khê Thủy", "Thủy", "Cấn", "Đoài"],
+            "1975": ["Ất Mão", "Đại Khê Thủy", "Thủy", "Đoài", "Cấn"],
+            "1976": ["Bính Thìn", "Sa Trung Thổ", "Thổ", "Càn", "Ly"],
+            "1977": ["Đinh Tỵ", "Sa Trung Thổ", "Thổ", "Khôn", "Khảm"],
+            "1978": ["Mậu Ngọ", "Thiên Thượng Hỏa", "Hỏa", "Tốn", "Khôn"],
+            "1979": ["Kỷ Mùi", "Thiên Thượng Hỏa", "Hỏa", "Chấn", "Chấn"],
+            "1980": ["Canh Thân", "Thạch Lựu Mộc", "Mộc", "Khôn", "Tốn"],
+            "1981": ["Tân Dậu", "Thạch Lựu Mộc", "Mộc", "Khảm", "Cấn"],
+            "1982": ["Nhâm Tuất", "Đại Hải Thủy", "Thủy", "Ly", "Càn"],
+            "1983": ["Quý Hợi", "Đại Hải Thủy", "Thủy", "Cấn", "Đoài"],
+            "1984": ["Giáp Tý", "Hải Trung Kim", "Kim", "Đoài", "Cấn"],
+            "1985": ["Ất Sửu", "Hải Trung Kim", "Kim", "Càn", "Ly"],
+            "1986": ["Bính Dần", "Lư Trung Hỏa", "Hỏa", "Khôn", "Khảm"],
+            "1987": ["Đinh Mão", "Lư Trung Hỏa", "Hỏa", "Tốn", "Khôn"],
+            "1988": ["Mậu Thìn", "Đại Lâm Mộc", "Mộc", "Chấn", "Chấn"],
+            "1989": ["Kỷ Tỵ", "Đại Lâm Mộc", "Mộc", "Khôn", "Tốn"],
+            "1990": ["Canh Ngọ", "Lộ Bàng Thổ", "Thổ", "Khảm", "Cấn"],
+            "1991": ["Tân Mùi", "Lộ Bàng Thổ", "Thổ", "Ly", "Càn"],
+            "1992": ["Nhâm Thân", "Kiếm Phong Kim", "Kim", "Cấn", "Đoài"],
+            "1993": ["Quý Dậu", "Kiếm Phong Kim", "Kim", "Đoài", "Cấn"],
+            "1994": ["Giáp Tuất", "Sơn Đầu Hỏa", "Hỏa", "Càn", "Ly"],
+            "1995": ["Ất Hợi", "Sơn Đầu Hỏa", "Hỏa", "Khôn", "Khảm"],
+            "1996": ["Bính Tý", "Giản Hạ Thủy", "Thủy", "Tốn", "Khôn"],
+            "1997": ["Đinh Sửu", "Giản Hạ Thủy", "Thủy", "Chấn", "Chấn"],
+            "1998": ["Mậu Dần", "Thành Đầu Thổ", "Thổ", "Khôn", "Tốn"],
+            "1999": ["Kỷ Mão", "Thành Đầu Thổ", "Thổ", "Khảm", "Cấn"],
+            "2000": ["Canh Thìn", "Bạch Lạp Kim", "Kim", "Ly", "Càn"],
+            "2001": ["Tân Tỵ", "Bạch Lạp Kim", "Kim", "Cấn", "Đoài"],
+            "2002": ["Nhâm Ngọ", "Dương Liễu Mộc", "Mộc", "Đoài", "Cấn"],
+            "2003": ["Quý Mùi", "Dương Liễu Mộc", "Mộc", "Càn", "Ly"],
+            "2004": ["Giáp Thân", "Tuyền Trung Thủy", "Thủy", "Khôn", "Khảm"],
+            "2005": ["Ất Dậu", "Tuyền Trung Thủy", "Thủy", "Tốn", "Khôn"],
+            "2006": ["Bính Tuất", "Ốc Thượng Thổ", "Thổ", "Chấn", "Chấn"],
+            "2007": ["Đinh Hợi", "Ốc Thượng Thổ", "Thổ", "Khôn", "Tốn"],
+            "2008": ["Mậu Tý", "Tích Lịch Hỏa", "Hỏa", "Khảm", "Cấn"],
+            "2009": ["Kỷ Sửu", "Tích Lịch Hỏa", "Hỏa", "Ly", "Càn"],
+            "2010": ["Canh Dần", "Tùng Bách Mộc", "Mộc", "Cấn", "Đoài"],
+            "2011": ["Tân Mão", "Tùng Bách Mộc", "Mộc", "Đoài", "Cấn"]
+        };
+
+        const hopCung = {
+            "Khảm-Khảm": "Phục Vị (Tốt)", "Khảm-Khôn": "Tuyệt Mệnh (Xấu)", "Khảm-Chấn": "Thiên Y (Tốt)", "Khảm-Tốn": "Sinh Khí (Tốt)", 
+            "Khảm-Càn": "Lục Sát (Xấu)", "Khảm-Đoài": "Họa Hại (Xấu)", "Khảm-Cấn": "Ngũ Quỷ (Xấu)", "Khảm-Ly": "Diên Niên (Tốt)",
+            "Khôn-Khảm": "Tuyệt Mệnh (Xấu)", "Khôn-Khôn": "Phục Vị (Tốt)", "Khôn-Chấn": "Họa Hại (Xấu)", "Khôn-Tốn": "Ngũ Quỷ (Xấu)",
+            "Khôn-Càn": "Diên Niên (Tốt)", "Khôn-Đoài": "Thiên Y (Tốt)", "Khôn-Cấn": "Sinh Khí (Tốt)", "Khôn-Ly": "Lục Sát (Xấu)",
+            "Chấn-Khảm": "Thiên Y (Tốt)", "Chấn-Khôn": "Họa Hại (Xấu)", "Chấn-Chấn": "Phục Vị (Tốt)", "Chấn-Tốn": "Diên Niên (Tốt)",
+            "Chấn-Càn": "Ngũ Quỷ (Xấu)", "Chấn-Đoài": "Tuyệt Mệnh (Xấu)", "Chấn-Cấn": "Lục Sát (Xấu)", "Chấn-Ly": "Sinh Khí (Tốt)",
+            "Tốn-Khảm": "Sinh Khí (Tốt)", "Tốn-Khôn": "Ngũ Quỷ (Xấu)", "Tốn-Chấn": "Diên Niên (Tốt)", "Tốn-Tốn": "Phục Vị (Tốt)",
+            "Tốn-Càn": "Họa Hại (Xấu)", "Tốn-Đoài": "Lục Sát (Xấu)", "Tốn-Cấn": "Tuyệt Mệnh (Xấu)", "Tốn-Ly": "Thiên Y (Tốt)",
+            "Càn-Khảm": "Lục Sát (Xấu)", "Càn-Khôn": "Diên Niên (Tốt)", "Càn-Chấn": "Ngũ Quỷ (Xấu)", "Càn-Tốn": "Họa Hại (Xấu)",
+            "Càn-Càn": "Phục Vị (Tốt)", "Càn-Đoài": "Sinh Khí (Tốt)", "Càn-Cấn": "Thiên Y (Tốt)", "Càn-Ly": "Tuyệt Mệnh (Xấu)",
+            "Đoài-Khảm": "Họa Hại (Xấu)", "Đoài-Khôn": "Thiên Y (Tốt)", "Đoài-Chấn": "Tuyệt Mệnh (Xấu)", "Đoài-Tốn": "Lục Sát (Xấu)",
+            "Đoài-Càn": "Sinh Khí (Tốt)", "Đoài-Đoài": "Phục Vị (Tốt)", "Đoài-Cấn": "Diên Niên (Tốt)", "Đoài-Ly": "Ngũ Quỷ (Xấu)",
+            "Cấn-Khảm": "Ngũ Quỷ (Xấu)", "Cấn-Khôn": "Sinh Khí (Tốt)", "Cấn-Chấn": "Lục Sát (Xấu)", "Cấn-Tốn": "Tuyệt Mệnh (Xấu)",
+            "Cấn-Càn": "Thiên Y (Tốt)", "Cấn-Đoài": "Diên Niên (Tốt)", "Cấn-Cấn": "Phục Vị (Tốt)", "Cấn-Ly": "Họa Hại (Xấu)",
+            "Ly-Khảm": "Diên Niên (Tốt)", "Ly-Khôn": "Lục Sát (Xấu)", "Ly-Chấn": "Sinh Khí (Tốt)", "Ly-Tốn": "Thiên Y (Tốt)",
+            "Ly-Càn": "Tuyệt Mệnh (Xấu)", "Ly-Đoài": "Ngũ Quỷ (Xấu)", "Ly-Cấn": "Họa Hại (Xấu)", "Ly-Ly": "Phục Vị (Tốt)"
+        };
+
+        const sinhKhac = {
+            "Kim-Kim": "Bình Hòa", "Kim-Mộc": "Kim khắc Mộc (Xấu)", "Kim-Thủy": "Kim sinh Thủy (Tốt)", "Kim-Hỏa": "Hỏa khắc Kim (Xấu)", "Kim-Thổ": "Thổ sinh Kim (Tốt)",
+            "Mộc-Kim": "Kim khắc Mộc (Xấu)", "Mộc-Mộc": "Bình Hòa", "Mộc-Thủy": "Thủy sinh Mộc (Tốt)", "Mộc-Hỏa": "Mộc sinh Hỏa (Tốt)", "Mộc-Thổ": "Mộc khắc Thổ (Xấu)",
+            "Thủy-Kim": "Kim sinh Thủy (Tốt)", "Thủy-Mộc": "Thủy sinh Mộc (Tốt)", "Thủy-Thủy": "Bình Hòa", "Thủy-Hỏa": "Thủy khắc Hỏa (Xấu)", "Thủy-Thổ": "Thổ khắc Thủy (Xấu)",
+            "Hỏa-Kim": "Hỏa khắc Kim (Xấu)", "Hỏa-Mộc": "Mộc sinh Hỏa (Tốt)", "Hỏa-Thủy": "Thủy khắc Hỏa (Xấu)", "Hỏa-Hỏa": "Bình Hòa", "Hỏa-Thổ": "Hỏa sinh Thổ (Tốt)",
+            "Thổ-Kim": "Thổ sinh Kim (Tốt)", "Thổ-Mộc": "Mộc khắc Thổ (Xấu)", "Thổ-Thủy": "Thổ khắc Thủy (Xấu)", "Thổ-Hỏa": "Hỏa sinh Thổ (Tốt)", "Thổ-Thổ": "Bình Hòa"
+        };
+
+        function compareYears() {
+            const y1 = document.getElementById('year1').value;
+            const y2 = document.getElementById('year2').value;
+            const resultArea = document.getElementById('resultArea');
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (data[y1] && data[y2]) {
+                const p1 = data[y1];
+                const p2 = data[y2];
+
+                // Hiển thị thông tin
+                document.getElementById('p1Mệnh').innerText = p1[1] + " (" + p1[2] + ")";
+                document.getElementById('p2Mệnh').innerText = p2[1] + " (" + p2[2] + ")";
+                document.getElementById('p1Nam').innerText = p1[3];
+                document.getElementById('p2Nu').innerText = p2[4];
+
+                // Luận ngũ hành
+                const keyNH = p1[2] + "-" + p2[2];
+                document.getElementById('resNguHanh').innerText = sinhKhac[keyNH] || "Bình Hòa";
+
+                // Luận cung phi
+                const keyCP = p1[3] + "-" + p2[4];
+                const ketQuaCP = hopCung[keyCP] || "Chưa rõ";
+                document.getElementById('resCungPhi').innerText = ketQuaCP;
+
+                errorMsg.classList.add('hidden');
+                resultArea.classList.remove('hidden');
+            } else {
+                resultArea.classList.add('hidden');
+                errorMsg.classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
